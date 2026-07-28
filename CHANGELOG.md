@@ -2,7 +2,14 @@
 
 All notable changes to the Magicweave plugin are documented here. Versions follow
 [semantic versioning](https://semver.org); the version lives in
-`plugins/magicweave/.claude-plugin/plugin.json`.
+`.claude-plugin/plugin.json`.
+
+## 1.0.1 — 2026-07-28
+
+- Flatten the plugin to the repo root (plugin manifest at `.claude-plugin/plugin.json`,
+  components at root) so the repo is directly installable and accepted by the plugin
+  directory; `marketplace.json` now uses `source: "./"`. No behavior change.
+- Point homepage/author URLs at `www.magicweave.xyz` (apex now 301-redirects to www).
 
 ## 1.0.0 — 2026-07-28
 

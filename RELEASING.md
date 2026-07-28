@@ -1,13 +1,13 @@
 # Releasing
 
 **The one rule:** bump `version` in
-[`plugins/magicweave/.claude-plugin/plugin.json`](plugins/magicweave/.claude-plugin/plugin.json)
+[`.claude-plugin/plugin.json`](.claude-plugin/plugin.json)
 on **every** release. Claude Code caches installed plugins by version string — if you push
 changes without bumping it, existing installs keep the old cached copy and never update.
 
 ## Cut a release
 
-1. Make your changes and run `claude plugin validate ./plugins/magicweave` (must pass).
+1. Make your changes and run `claude plugin validate .` (must pass).
 2. Bump `version` in `plugin.json` (semver: MAJOR breaking, MINOR feature, PATCH fix).
 3. Add a matching entry at the top of [`CHANGELOG.md`](CHANGELOG.md).
 4. Commit and push to `main`. CI re-validates on push.

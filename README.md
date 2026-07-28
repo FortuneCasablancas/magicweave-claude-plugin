@@ -1,9 +1,10 @@
 # Magicweave plugin for Claude Code
 
-Build, simulate, and ship game economies on [Magicweave](https://magicweave.xyz) — currencies,
+Build, simulate, and ship game economies on [Magicweave](https://www.magicweave.xyz) — currencies,
 stats, game loops, leaderboards, and spin wheels — end to end, from Claude Code.
 
-This repository is both a **plugin marketplace** and the **Magicweave plugin** it distributes.
+This repository is both a **plugin marketplace** and the **Magicweave plugin** it distributes
+(the plugin lives at the repo root, so the repo is directly installable as a plugin too).
 The plugin bundles the live Magicweave MCP connector (`https://mcp.magicweave.xyz/mcp`) plus
 skills and subagents that drive the platform's build and maintenance harnesses, so you go from
 a game concept to a live, verified economy without reading docs.
@@ -36,9 +37,8 @@ Try it:
 ## Develop locally
 
 ```
-claude --plugin-dir ./plugins/magicweave
+claude --plugin-dir .
 claude plugin validate .
-claude plugin validate ./plugins/magicweave
 ```
 
 `/reload-plugins` picks up edits without a restart.
@@ -46,12 +46,12 @@ claude plugin validate ./plugins/magicweave
 ## Layout
 
 ```
-.claude-plugin/marketplace.json     # marketplace catalog
-plugins/magicweave/                 # the plugin
-  .claude-plugin/plugin.json        # manifest
-  .mcp.json                         # remote MCP server (OAuth on enable)
-  skills/{build,maintain,guardrails}/SKILL.md
-  agents/magicweave-{economy-architect,definitions-author,verifier}.md
+.claude-plugin/
+  plugin.json                       # plugin manifest (plugin lives at repo root)
+  marketplace.json                  # marketplace catalog (source: "./")
+.mcp.json                           # remote MCP server (OAuth on enable)
+skills/{build,maintain,guardrails}/SKILL.md
+agents/magicweave-{economy-architect,definitions-author,verifier}.md
 ```
 
 ## License

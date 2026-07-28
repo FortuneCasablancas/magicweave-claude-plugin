@@ -1,6 +1,6 @@
 # Magicweave plugin
 
-Build and run game economies on [Magicweave](https://magicweave.xyz) from Claude Code.
+Build and run game economies on [Magicweave](https://www.magicweave.xyz) from Claude Code.
 
 The plugin bundles the live Magicweave MCP connector (`https://mcp.magicweave.xyz/mcp`, OAuth
 email + OTP) and adds guided workflows on top of it.
