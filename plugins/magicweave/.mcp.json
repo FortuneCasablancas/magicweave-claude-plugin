@@ -1,0 +1,8 @@
+{
+  "mcpServers": {
+    "magicweave": {
+      "type": "http",
+      "url": "https://mcp.magicweave.xyz/mcp"
+    }
+  }
+}

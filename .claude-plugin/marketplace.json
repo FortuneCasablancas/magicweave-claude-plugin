@@ -1,0 +1,19 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-marketplace.json",
+  "name": "magicweave",
+  "owner": {
+    "name": "Magicweave",
+    "email": "sahil@magicweave.xyz",
+    "url": "https://magicweave.xyz"
+  },
+  "description": "The Magicweave plugin for Claude Code — build, simulate, and run game economies.",
+  "plugins": [
+    {
+      "name": "magicweave",
+      "source": "./plugins/magicweave",
+      "description": "Build, simulate, and ship Magicweave game economies from Claude Code.",
+      "category": "gamedev",
+      "keywords": ["games", "game-economy", "leaderboards", "spin-wheel", "mcp", "gamedev"]
+    }
+  ]
+}

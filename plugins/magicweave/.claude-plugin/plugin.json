@@ -1,0 +1,15 @@
+{
+  "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
+  "name": "magicweave",
+  "description": "Build, simulate, and ship game economies on Magicweave — currencies, stats, game loops, leaderboards, and spin wheels — end to end from Claude Code.",
+  "version": "0.1.0",
+  "author": {
+    "name": "Magicweave",
+    "email": "sahil@magicweave.xyz",
+    "url": "https://magicweave.xyz"
+  },
+  "homepage": "https://magicweave.xyz",
+  "repository": "https://github.com/FortuneCasablancas/magicweave-claude-plugin",
+  "license": "MIT",
+  "keywords": ["games", "game-economy", "leaderboards", "spin-wheel", "mcp", "gamedev"]
+}
