@@ -9,6 +9,8 @@ All notable changes to the Magicweave plugin are documented here. Versions follo
 - Skills re-synced from mirage `packages/mcp/skills`: `build` rewritten for V2; `edit` and
   `migrate` added.
 - `deploy` skill added, with per-host references (Vercel, Cloudflare, GitHub Pages, AWS, Google Cloud) and scripts.
+- Release order: the `deploy` skill needs the `set_allowed_origins` MCP tool and the updated docs pages, so
+  2.0.0 ships only after the mirage MCP release that includes them.
 - `maintain` removed (renamed `edit`).
 - `guardrails` and the three subagents (`magicweave-economy-architect`,
   `magicweave-definitions-author`, `magicweave-verifier`) removed; they taught v1 tools that no
