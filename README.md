@@ -5,7 +5,7 @@ rules, leaderboards, and the rest of a game's economy — from Claude Code.
 
 This repository is both a **plugin marketplace** and the **Magicweave plugin** it distributes
 (the plugin lives at the repo root, so the repo is directly installable as a plugin too).
-The plugin bundles the live Magicweave MCP server (`https://mcp.magicweave.xyz/mcp`) and three
+The plugin bundles the live Magicweave MCP server (`https://mcp.magicweave.xyz/mcp`) and four
 skills that walk Claude through the work as checklists.
 
 ## Install
@@ -24,6 +24,8 @@ through the server's `create_project_setup` tool.
 - **`/magicweave:build`** — Build a new Magicweave game economy, concept to live in a development environment — currencies, stats, rules, leaderboards, checked and shipped in order.
 - **`/magicweave:edit`** — Change a live Magicweave game without breaking the people playing it — read the current state first, check impact, then publish and promote environment by environment.
 - **`/magicweave:migrate`** — Bring a launched game onto Magicweave — inventory its existing backend, map it onto the document tree, and carry its players across.
+- **`/magicweave:deploy`** — Put a studio's web game live on their own hosting account and connect it to Magicweave — client key in the host, the live address on the environment's web addresses, optional PostHog, a smoke test.
+  Hosting stays on your own Vercel, Cloudflare, GitHub Pages, AWS or Google Cloud account; the skill uses their CLIs and asks before anything touches production or DNS.
 
 Try it:
 
@@ -47,7 +49,7 @@ claude plugin validate .
   plugin.json                       # plugin manifest (plugin lives at repo root)
   marketplace.json                  # marketplace catalog (source: "./")
 .mcp.json                           # remote MCP server (OAuth on enable)
-skills/{build,edit,migrate}/SKILL.md   # synced from mirage packages/mcp/skills
+skills/{build,edit,migrate,deploy}/   # synced from mirage packages/mcp/skills
 ```
 
 ## License
