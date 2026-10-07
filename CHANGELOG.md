@@ -4,6 +4,18 @@ All notable changes to the Magicweave plugin are documented here. Versions follo
 [semantic versioning](https://semver.org); the version lives in
 `.claude-plugin/plugin.json`.
 
+## 2.0.0 — 2026-10-07
+
+- Skills re-synced from mirage `packages/mcp/skills`: `build` rewritten for V2; `edit` and
+  `migrate` added.
+- `maintain` removed (renamed `edit`).
+- `guardrails` and the three subagents (`magicweave-economy-architect`,
+  `magicweave-definitions-author`, `magicweave-verifier`) removed; they taught v1 tools that no
+  longer exist, and the V2 skills carry their own guards.
+- Validate workflow fixed: the second step now validates `.claude-plugin/plugin.json` instead
+  of a `plugins/magicweave` path that no longer exists.
+- `RELEASING.md` points at mirage `packages/mcp` and adds the skills sync step.
+
 ## 1.0.1 — 2026-07-28
 
 - Flatten the plugin to the repo root (plugin manifest at `.claude-plugin/plugin.json`,

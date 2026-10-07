@@ -1,13 +1,12 @@
 # Magicweave plugin for Claude Code
 
-Build, simulate, and ship game economies on [Magicweave](https://www.magicweave.xyz) — currencies,
-stats, game loops, leaderboards, and spin wheels — end to end, from Claude Code.
+Build and run game backends on [Magicweave](https://www.magicweave.xyz) — currencies, stats,
+rules, leaderboards, and the rest of a game's economy — from Claude Code.
 
 This repository is both a **plugin marketplace** and the **Magicweave plugin** it distributes
 (the plugin lives at the repo root, so the repo is directly installable as a plugin too).
-The plugin bundles the live Magicweave MCP connector (`https://mcp.magicweave.xyz/mcp`) plus
-skills and subagents that drive the platform's build and maintenance harnesses, so you go from
-a game concept to a live, verified economy without reading docs.
+The plugin bundles the live Magicweave MCP server (`https://mcp.magicweave.xyz/mcp`) and three
+skills that walk Claude through the work as checklists.
 
 ## Install
 
@@ -16,17 +15,15 @@ a game concept to a live, verified economy without reading docs.
 /plugin install magicweave@magicweave
 ```
 
-On first use the bundled MCP server prompts you to sign in (OAuth, email + OTP) — no manual
-config. You'll also need a Magicweave project + credentials, created once in the console at
-[console.magicweave.xyz](https://console.magicweave.xyz).
+On first use the bundled MCP server prompts you to sign in once (OAuth, email + OTP) — no manual
+config. A blank organization is enough: `/magicweave:build` creates the project and environment
+through the server's `create_project_setup` tool.
 
 ## What you get
 
-- **`/magicweave:build`** — build a new game economy from a concept, phase by phase.
-- **`/magicweave:maintain`** — safely edit, tune, or audit a live game (impact-scan first).
-- **`/magicweave:guardrails`** — the hard rules Claude reads before any backend work.
-- **Subagents** — `magicweave-economy-architect` (design the spec), `magicweave-definitions-author`
-  (author + verify definitions), `magicweave-verifier` (play the loop + rejection matrix).
+- **`/magicweave:build`** — Build a new Magicweave game economy, concept to live in a development environment — currencies, stats, rules, leaderboards, checked and shipped in order.
+- **`/magicweave:edit`** — Change a live Magicweave game without breaking the people playing it — read the current state first, check impact, then publish and promote environment by environment.
+- **`/magicweave:migrate`** — Bring a launched game onto Magicweave — inventory its existing backend, map it onto the document tree, and carry its players across.
 
 Try it:
 
@@ -50,8 +47,7 @@ claude plugin validate .
   plugin.json                       # plugin manifest (plugin lives at repo root)
   marketplace.json                  # marketplace catalog (source: "./")
 .mcp.json                           # remote MCP server (OAuth on enable)
-skills/{build,maintain,guardrails}/SKILL.md
-agents/magicweave-{economy-architect,definitions-author,verifier}.md
+skills/{build,edit,migrate}/SKILL.md   # synced from mirage packages/mcp/skills
 ```
 
 ## License

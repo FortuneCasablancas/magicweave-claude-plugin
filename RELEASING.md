@@ -7,14 +7,17 @@ changes without bumping it, existing installs keep the old cached copy and never
 
 ## Cut a release
 
-1. Make your changes and run `claude plugin validate .` (must pass).
-2. Bump `version` in `plugin.json` (semver: MAJOR breaking, MINOR feature, PATCH fix).
-3. Add a matching entry at the top of [`CHANGELOG.md`](CHANGELOG.md).
-4. Commit and push to `main`. CI re-validates on push.
+1. Skills come from mirage: run `pnpm --filter @magicweave/mcp skills:check` with
+   `MW_PLUGIN_REPO` pointing at this checkout, then `skills:sync` if it reports drift. Never
+   hand-edit `skills/*/SKILL.md`.
+2. Run `claude plugin validate .` (must pass).
+3. Bump `version` in `plugin.json` (semver: MAJOR breaking, MINOR feature, PATCH fix).
+4. Add a matching entry at the top of [`CHANGELOG.md`](CHANGELOG.md).
+5. Commit and push to `main`. CI re-validates on push.
 
 That's it. The community-directory listing re-pins to the new commit SHA automatically, and
 users pick up the new version on their next `/plugin marketplace update` / auto-update.
 
 No build step, no deploy — the plugin is static files served from this git repo. The only
-runtime component is the MCP server at `https://mcp.magicweave.xyz/mcp`, which lives in the
-`magicweave-fastmcp` repo and is released separately.
+runtime component is the MCP server at `https://mcp.magicweave.xyz/mcp`, which lives in mirage
+`packages/mcp` and is released separately.

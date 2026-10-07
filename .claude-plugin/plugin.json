@@ -1,8 +1,8 @@
 {
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "magicweave",
-  "description": "Build, simulate, and ship game economies on Magicweave — currencies, stats, game loops, leaderboards, and spin wheels — end to end from Claude Code.",
-  "version": "1.0.1",
+  "description": "Build and run game backends on Magicweave — currencies, stats, rules, leaderboards — from Claude Code, with skills to build a new game, edit a live one, or migrate a launched one.",
+  "version": "2.0.0",
   "author": {
     "name": "Magicweave",
     "email": "sahil@magicweave.xyz",
