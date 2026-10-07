@@ -23,10 +23,9 @@ Variables are compiled in at build time, so build locally. Replace the build
 command with the one `scripts/detect-build.mjs` printed:
 
 ```sh
-set -a; . ./.env; set +a
-VITE_MW_BASE_URL="$MW_BASE_URL" \
-VITE_MW_CLIENT_ID="$MW_CLIENT_ID" \
-VITE_MW_CLIENT_SECRET="$MW_CLIENT_SECRET" \
+VITE_MW_BASE_URL="$(grep '^MW_BASE_URL=' .env | cut -d= -f2-)" \
+VITE_MW_CLIENT_ID="$(grep '^MW_CLIENT_ID=' .env | cut -d= -f2-)" \
+VITE_MW_CLIENT_SECRET="$(grep '^MW_CLIENT_SECRET=' .env | cut -d= -f2-)" \
 pnpm run build
 ```
 

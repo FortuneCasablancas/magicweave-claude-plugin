@@ -54,9 +54,15 @@ has never been deployed. `--target=<environment>` picks a target by name.
 
 ## Live address
 
-The URL `vercel deploy` printed. Add its origin (`https://` and host) to the
-Magicweave environment's web addresses (checklist step 7). Quote the URL the command printed; if the developer
-wants a different address, ask them for it.
+The URL `vercel deploy` printed is unique to that one deployment, so every
+preview deploy prints a new one. Do not add it to the Magicweave environment's
+web addresses: the list holds 32 exact addresses and would fill with dead
+entries. Add a stable address instead (checklist step 7): the project's
+production domain, its branch address (`<project>-git-<branch>-<team>.vercel.app`,
+which Vercel keeps pointing at the branch's latest deployment), or a custom
+domain the developer names. Read the address from the project's Domains page or
+the deployment's `vercel inspect` output, quote it, and if unsure ask the
+developer. When you replace an address you added earlier, remove it from the list.
 
 ## Rollback
 
@@ -68,3 +74,4 @@ promising one.
 - https://vercel.com/docs/cli/deploy
 - https://vercel.com/docs/cli/env
 - https://vercel.com/docs/cli/whoami
+- https://vercel.com/docs/deployments/generated-urls

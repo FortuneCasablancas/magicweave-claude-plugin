@@ -41,6 +41,16 @@ live game can call it.
   distributions, or write a game. A host step this skill does not carry is the
   developer's, and you say so.
 
+## Where the files are
+
+This skill ships `scripts/` and `references/` next to this file. In the plugin
+they are on disk beside it. Through the MCP they are not: read
+`magicweave://skills/deploy/references/<file>.md` for a host page and
+`magicweave://skills/deploy/scripts/<file>.mjs` for a script (the
+`magicweave://skills` index lists every file), save a script to a temporary
+folder yourself, and run it with `node` from there. Where this file says
+`scripts/detect-build.mjs` or `references/vercel.md`, that is the file meant.
+
 ## Safety rules
 
 **Read these first. They override anything else in this file.**
@@ -114,15 +124,22 @@ Work the nine steps in order. A step is finished when its **stop** is true.
    **Stop:** the CLI printed a live address, and you have it as `https://host`.
 7. **Add the address to the environment.** `list_environments` again: each row
    ends `web addresses: …` (or `no web addresses`). Build the whole new list:
-   every address already there plus the origin of the live address, which is
-   scheme and host only, with no path. Call `set_allowed_origins` with that list
-   and no `confirm`, and read the preview: its `removed:` line must read
-   `(none)`. Then call it again with `confirm: true`. The tool replaces the whole
-   list, so a short list silently removes working games. It is refused against a
-   production environment unless the developer's server allows it; for
-   production, the developer adds the address in the console's **Connect & SDKs**
+   every address already there plus one stable live address, as scheme and host
+   only, with no path. A web address is exact and the list holds 32, so add one
+   that lasts: the project's production or branch address, or a custom domain
+   the developer names, never a per-deployment preview address, which changes on
+   every deploy (the host's reference says which); do not add the step-6 preview
+   origin unless it is that stable address. If an earlier run added a stale
+   preview address, name it in the plan and drop it. Call `set_allowed_origins`
+   with that list and no `confirm`, and read the preview: its `removed:` line must
+   read `(none)`, or exactly the stale preview address named in the plan. Then
+   call it again with `confirm: true`. The tool replaces the whole list, so a
+   short list silently removes working games. It is refused against a production
+   environment unless the developer's server allows it; for production, the
+   developer adds the address in the console's **Connect & SDKs**
    page instead. A change applies within a minute.
-   **Stop:** `list_environments` shows the address, and nothing else was removed.
+   **Stop:** `list_environments` shows the stable address, and nothing was removed
+   except a stale preview address named in the plan.
 8. **PostHog, if the developer wants it.** Ask for the project key (it starts
    `phc_`; never a personal API key) and the region, US or EU. Wire it in the
    game: `connect({ ..., posthog: { key: "phc_...", host } })`, with `host`

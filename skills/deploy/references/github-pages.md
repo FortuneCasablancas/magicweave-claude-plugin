@@ -2,7 +2,7 @@
 
 Use when the game's repository is on GitHub and the build is static. A GitHub
 Actions workflow builds the game and publishes it. The build variables are
-repository variables on the `github-pages` environment.
+environment variables on the `github-pages` environment.
 
 ## Log in
 
@@ -31,10 +31,9 @@ Variables, not secrets: a workflow reads them as `${{ vars.NAME }}`. A client ke
 public build anyway. Read the values from `.env` without echoing them:
 
 ```sh
-set -a; . ./.env; set +a
-gh variable set VITE_MW_BASE_URL --env github-pages --body "$MW_BASE_URL"
-gh variable set VITE_MW_CLIENT_ID --env github-pages --body "$MW_CLIENT_ID"
-gh variable set VITE_MW_CLIENT_SECRET --env github-pages --body "$MW_CLIENT_SECRET"
+grep '^MW_BASE_URL=' .env | cut -d= -f2- | gh variable set VITE_MW_BASE_URL --env github-pages
+grep '^MW_CLIENT_ID=' .env | cut -d= -f2- | gh variable set VITE_MW_CLIENT_ID --env github-pages
+grep '^MW_CLIENT_SECRET=' .env | cut -d= -f2- | gh variable set VITE_MW_CLIENT_SECRET --env github-pages
 ```
 
 Add `--repo OWNER/REPO` outside the repository's folder. Use `EXPO_PUBLIC_MW_*`
