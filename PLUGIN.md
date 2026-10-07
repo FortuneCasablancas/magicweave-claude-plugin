@@ -1,31 +1,24 @@
 # Magicweave plugin
 
-Build and run game economies on [Magicweave](https://www.magicweave.xyz) from Claude Code.
+Build and run game backends on [Magicweave](https://www.magicweave.xyz) from Claude Code.
 
-The plugin bundles the live Magicweave MCP connector (`https://mcp.magicweave.xyz/mcp`, OAuth
-email + OTP) and adds guided workflows on top of it.
+The plugin bundles the live Magicweave MCP server (`https://mcp.magicweave.xyz/mcp`, OAuth
+email + OTP — sign in once) and adds three skills on top of it. The skills are checklists:
+they tell Claude what to read, what to write and what to check before it ships, and the server
+does the work.
 
 ## Skills
 
 | Skill | Invoke | What it does |
 | :--- | :--- | :--- |
-| build | `/magicweave:build <concept>` | Concept → spec → validate → author → verify → ship (build harness). |
-| maintain | `/magicweave:maintain <change>` | Discover → impact-scan → classify → apply in testing → verify → promote (maintenance harness). |
-| guardrails | `/magicweave:guardrails` | The hard rules; read before any backend work. |
+| build | `/magicweave:build <concept>` | Build a new Magicweave game economy, concept to live in a development environment — currencies, stats, rules, leaderboards, checked and shipped in order. |
+| edit | `/magicweave:edit <change>` | Change a live Magicweave game without breaking the people playing it — read the current state first, check impact, then publish and promote environment by environment. |
+| migrate | `/magicweave:migrate` | Bring a launched game onto Magicweave — inventory its existing backend, map it onto the document tree, and carry its players across. |
 
 All three are also model-invoked automatically when a task matches.
-
-## Subagents
-
-- **magicweave-economy-architect** — designs the `EconomySpec` (design-only; validates and
-  simulates, never writes).
-- **magicweave-definitions-author** — creates + reads back definitions in dependency order;
-  applies safe edits/migrations (the only hat that mutates).
-- **magicweave-verifier** — drives the closed game loop and the rejection matrix.
 
 ## Requirements
 
 - The `magicweave` MCP server (bundled here) connected — you sign in on first tool call.
-- A Magicweave project + credentials, created once in [the console](https://console.magicweave.xyz).
-
-The full platform reference is available in-session via the `get_doc("llms")` tool.
+- A Magicweave organization. `/magicweave:build` creates the project and environment with
+  `create_project_setup`; the [console](https://console.magicweave.xyz) shows the result.

@@ -14,4 +14,4 @@ jobs:
       - name: Validate marketplace
         run: claude plugin validate .
       - name: Validate plugin
-        run: claude plugin validate ./plugins/magicweave
+        run: claude plugin validate .claude-plugin/plugin.json
