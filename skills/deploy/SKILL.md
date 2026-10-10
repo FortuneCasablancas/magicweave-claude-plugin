@@ -150,9 +150,9 @@ Work the nine steps in order. A step is finished when its **stop** is true.
    player says yes; nothing loads or sends before that. Rebuild and redeploy.
    To see these numbers in Magicweave, the developer creates a PostHog personal
    API key limited to Query Read and to this one project, and pastes it
-   themselves in the console under **Account › PostHog** for that environment:
-   never in chat, never in the host, never in the build. The numbers then show
-   in the console's **Analytics** (Operate › Analytics) after the nightly sync.
+   themselves in the console, at **Observe › Analytics → Connect integration**
+   for that environment: never in chat, never in the host, never in the build.
+   The numbers then show in **Analytics** (Observe › Analytics) after the nightly sync.
    Magicweave has no tool that takes that key, and you do not ask for it.
    **Stop:** the game passes `posthog` and a consent call, and the developer
    knows where the read key goes.
