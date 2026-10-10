@@ -13,7 +13,7 @@ into the repository or the workflow.
 ## Targets
 
 A repository has one Pages site, so it serves one Magicweave environment.
-Use a development or testing environment unless the developer asked for
+Use a development environment unless the developer asked for
 production, and use that environment's key in the variables below.
 
 ## Enable the Actions source first

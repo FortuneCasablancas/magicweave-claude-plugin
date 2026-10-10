@@ -101,12 +101,14 @@ Work the nine steps in order. A step is finished when its **stop** is true.
    **Stop:** `loggedIn` is `true`.
 3. **Choose the environment.** `whoami`, `list_projects`, then `list_environments`
    and read each environment's `kind`; do not infer it from the name.
-   `development` and `testing` use the host's preview or development target.
-   `production` only when the developer asked for production (safety rule 1).
+   `development` uses the host's preview or development target. `production`
+   only when the developer asked for production (safety rule 1). Environments
+   other than production cap how many new players a studio gets in a rolling
+   30 days, so a preview deploy stops new sign-ups at the cap; say so in the plan.
    **Stop:** one environment is chosen and its kind is known.
 4. **Get a client key.** `list_credentials` for that environment; if there is a
    usable client key whose secret the developer still has in `.env`, use it.
-   Otherwise `issue_credential` (development and testing only): it writes a
+   Otherwise `issue_credential` (development only): it writes a
    `.env` block with `MW_BASE_URL`, `MW_CLIENT_ID` and `MW_CLIENT_SECRET` once.
    A production key is issued in the console's **Connect & SDKs** page by the
    developer — say so and wait. A secret cannot be read back from Magicweave.

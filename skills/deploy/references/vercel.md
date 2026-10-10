@@ -15,7 +15,7 @@ Vercel names three environments: `development`, `preview`, `production`.
 
 | Magicweave environment kind | Vercel target                                  |
 | --------------------------- | ---------------------------------------------- |
-| development, testing        | `preview` (and `development` for `vercel dev`) |
+| development                 | `preview` (and `development` for `vercel dev`) |
 | production                  | `production`, only when the developer asked    |
 
 ## Set the build variables

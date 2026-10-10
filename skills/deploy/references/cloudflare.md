@@ -17,7 +17,7 @@ that one command and never written to a file.
 
 A Worker has no preview target in the sources below, so keep a separate Worker
 per Magicweave environment by giving each its own `name`: `<game>-dev` for
-development or testing, `<game>` for production (only when the developer asked).
+development, `<game>` for production (only when the developer asked).
 `name` in `wrangler.jsonc` decides which Worker a deploy updates.
 
 ## Configure the static-assets Worker

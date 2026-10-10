@@ -14,7 +14,7 @@ themselves. Never ask for, print or write a key file.
 ## Targets
 
 Firebase Hosting separates a preview channel from the live site. Use a preview
-channel for development or testing, and the live site only when the developer
+channel for development, and the live site only when the developer
 asked for production.
 
 ## Build with the variables set

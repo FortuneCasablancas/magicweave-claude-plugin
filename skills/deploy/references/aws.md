@@ -13,7 +13,7 @@ their own AWS credentials. Never ask for, print or write an access key.
 ## Targets
 
 Ask the developer which bucket and distribution serve which Magicweave
-environment. Use the one for development or testing unless they asked for
+environment. Use the one for development unless they asked for
 production. If they have only a production bucket, say so and stop; do not
 deploy a test build into it.
 
