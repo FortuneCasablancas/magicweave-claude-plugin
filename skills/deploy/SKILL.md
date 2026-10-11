@@ -157,7 +157,8 @@ Work the nine steps in order. A step is finished when its **stop** is true.
    One PostHog project per environment is the simplest setup. If two
    environments of this game share a project, the second can use **Copy from**
    in the same sheet: Magicweave copies the settings and key on its servers,
-   switched off until the developer switches it on. A shared project counts
+   switched off until the developer switches it on. Once both environments are
+   switched on and complete, a shared project counts
    each environment only by the events its own build tagged with the
    environment's id, which needs SDK 2.1 or later: SDK 2.0 builds, website
    pageviews and events before consent are not counted there.
