@@ -156,7 +156,7 @@ so a mistake comes back as a field name rather than a YAML error.
   (`progression/leaderboards/`), `write_event_type` (`rules/event-types/`),
   `write_rule` (`rules/rules/`) — one document per call.
   `write_draft_document` is the escape hatch and nothing more: use it only for
-  a kind with no typed writer (an ad placement, an asset, a game manifest),
+  a kind with no typed writer (an ad placement, a game manifest),
   passing `path` and the whole `content`. **Read first:**
   `concepts/events-and-rules`.
 - **Stop:** every currency, stat, event type, rule, board, item and listing the
