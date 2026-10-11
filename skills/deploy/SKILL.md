@@ -113,13 +113,21 @@ Work the nine steps in order. A step is finished when its **stop** is true.
    A production key is issued in the console's **Connect & SDKs** page by the
    developer — say so and wait. A secret cannot be read back from Magicweave.
    **Stop:** `.env` holds a client key for the chosen environment.
-5. **Set the build variables in the host.** Vite builds read `VITE_MW_BASE_URL`,
-   `VITE_MW_CLIENT_ID`, `VITE_MW_CLIENT_SECRET`; Expo web builds read
+5. **Set the build variables in the host.** First read which names the game
+   actually uses: grep its source for `import.meta.env.` (Vite) or
+   `process.env.EXPO_PUBLIC_` (Expo). The usual names are `VITE_MW_BASE_URL`,
+   `VITE_MW_CLIENT_ID`, `VITE_MW_CLIENT_SECRET`, or for Expo web
    `EXPO_PUBLIC_MW_BASE_URL`, `EXPO_PUBLIC_MW_CLIENT_ID`,
-   `EXPO_PUBLIC_MW_CLIENT_SECRET`. Take the values from `.env` without echoing
-   them, using the host's reference for the exact commands and for the target
-   that matches the environment.
-   **Stop:** the host lists all three names for the right target (names only).
+   `EXPO_PUBLIC_MW_CLIENT_SECRET`. If the game reads other names (the starter
+   word game reads `VITE_MW_EDGE_URL`), say so in the plan and set the names it
+   reads, or change the game to the usual names, only with the developer's yes.
+   Take the values from `.env` without echoing them, using the host's reference
+   for the exact commands and for the target that matches the environment. On
+   Vercel, a new project's first deployment is production, so set the three
+   variables for both `preview` and `production` and say so in the plan, or the
+   first build ships without a key.
+   **Stop:** the host lists all three names the game reads for the right
+   target(s) (names only).
 6. **Build and deploy.** Run the reference's build and deploy commands for a
    preview target (production only on request) and read the live address from
    the CLI's own output; never construct it from a pattern.
@@ -131,7 +139,10 @@ Work the nine steps in order. A step is finished when its **stop** is true.
    that lasts: the project's production or branch address, or a custom domain
    the developer names, never a per-deployment preview address, which changes on
    every deploy (the host's reference says which); do not add the step-6 preview
-   origin unless it is that stable address. If an earlier run added a stale
+   origin unless it is that stable address. On Vercel the stable public address
+   is the production domain (`<project>.vercel.app`): Deployment Protection puts
+   preview and generated URLs behind a Vercel login that players cannot pass,
+   unless the developer turns protection off for previews. If an earlier run added a stale
    preview address, name it in the plan and drop it. Call `set_allowed_origins`
    with that list and no `confirm`, and read the preview: its `removed:` line must
    read `(none)`, or exactly the stale preview address named in the plan. Then
@@ -166,7 +177,8 @@ Work the nine steps in order. A step is finished when its **stop** is true.
    knows where the read key goes.
 9. **Smoke-test the live game.** `node scripts/poll-live.mjs <live address>`
    waits for DNS, a valid certificate and a 2xx or 3xx answer, printing each
-   attempt. Then have the developer open the game and confirm that a Magicweave
+   attempt. A redirect to the host's login page is not live: it prints
+   `protected` and stops (exit 3); add `--keep-polling` to keep waiting. Then have the developer open the game and confirm that a Magicweave
    call succeeds, with no CORS error in the browser console. If it fails with
    a CORS error, the address is not on the list yet or is spelled differently:
    re-read `list_environments` and compare character by character.

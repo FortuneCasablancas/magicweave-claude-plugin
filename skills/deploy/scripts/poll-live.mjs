@@ -3,7 +3,10 @@
 // certificate is valid and the page responds 2xx or 3xx. Prints one line per
 // attempt, exits 0 when it is live and 1 when the timeout runs out.
 //
-//   node poll-live.mjs <https-url> [--timeout 600]
+// A redirect to a host's login wall (Vercel Deployment Protection) is not live:
+// it prints `protected` and exits 3, unless --keep-polling is given.
+//
+//   node poll-live.mjs <https-url> [--timeout 600] [--keep-polling]
 import { setTimeout as sleepFor } from "node:timers/promises";
 import dns from "node:dns/promises";
 import https from "node:https";
@@ -41,12 +44,14 @@ export async function resolves(host, resolver = dns) {
   return false;
 }
 
-/** One HTTPS GET, redirects not followed. Resolves `{ status }` or rejects with the socket/TLS error. */
+const LOGIN_WALL = /^https?:\/\/([^/]+\.)?vercel\.com\/(sso-api|login)(\/|\?|$)/;
+
+/** One HTTPS GET, redirects not followed. Resolves `{ status, location }` or rejects with the socket/TLS error. */
 export function httpsGet(url) {
   return new Promise((resolve, reject) => {
     const req = https.get(url, { timeout: 10_000 }, (res) => {
       res.resume();
-      resolve({ status: res.statusCode ?? 0 });
+      resolve({ status: res.statusCode ?? 0, location: res.headers.location });
     });
     req.on("timeout", () =>
       req.destroy(Object.assign(new Error("timed out"), { code: "ETIMEDOUT" })),
@@ -65,7 +70,14 @@ export async function probe(url, { resolver = dns, request = httpsGet } = {}) {
   if (!(await resolves(host, resolver)))
     return { state: "dns", message: `DNS: ${host} does not resolve yet` };
   try {
-    const { status } = await request(url);
+    const { status, location } = await request(url);
+    if (status >= 300 && status < 400 && location && LOGIN_WALL.test(location))
+      return {
+        state: "protected",
+        status,
+        message:
+          "protected: the host redirects to its login page, so players cannot open this address. Use the production domain, or turn Deployment Protection off for previews",
+      };
     if (status >= 200 && status < 400)
       return { state: "live", status, message: `live: ${String(status)}` };
     return {
@@ -84,11 +96,12 @@ export async function probe(url, { resolver = dns, request = httpsGet } = {}) {
  * Polls `url` until it is live or `timeoutSec` has passed, backing off from 2 s
  * to 30 s. `sleep`, `now`, `resolver` and `request` are injectable for tests.
  * @param {string} url
- * @param {{ timeoutSec?: number, resolver?: Resolver, request?: typeof httpsGet, sleep?: (ms: number) => Promise<unknown>, now?: () => number, log?: (line: string) => void }} [options]
+ * @param {{ timeoutSec?: number, keepPolling?: boolean, resolver?: Resolver, request?: typeof httpsGet, sleep?: (ms: number) => Promise<unknown>, now?: () => number, log?: (line: string) => void }} [options]
  */
 export async function pollLive(url, options = {}) {
   const {
     timeoutSec = 600,
+    keepPolling = false,
     resolver,
     request,
     sleep = sleepFor,
@@ -104,6 +117,8 @@ export async function pollLive(url, options = {}) {
     const elapsed = Math.round((now() - started) / 1000);
     log(`attempt ${String(attempt)} (${String(elapsed)}s): ${result.message}`);
     if (result.state === "live") return { ok: true, status: result.status, attempts: attempt };
+    if (result.state === "protected" && !keepPolling)
+      return { ok: false, protected: true, status: result.status, attempts: attempt };
     if (now() - started + delay > timeoutSec * 1000) {
       return { ok: false, attempts: attempt, last: result.message };
     }
@@ -116,17 +131,21 @@ async function main() {
   const args = process.argv.slice(2);
   const at = args.indexOf("--timeout");
   const timeoutSec = at === -1 ? 600 : Number(args[at + 1]);
+  const keepPolling = args.includes("--keep-polling");
   const url = args.find((arg, i) => !arg.startsWith("--") && !(at !== -1 && i === at + 1));
   if (!url || !Number.isFinite(timeoutSec) || timeoutSec <= 0) {
-    process.stderr.write("usage: node poll-live.mjs <https-url> [--timeout seconds]\n");
+    process.stderr.write(
+      "usage: node poll-live.mjs <https-url> [--timeout seconds] [--keep-polling]\n",
+    );
     process.exit(2);
   }
   try {
     const result = await pollLive(url, {
       timeoutSec,
+      keepPolling,
       log: (line) => process.stdout.write(`${line}\n`),
     });
-    process.exit(result.ok ? 0 : 1);
+    process.exit(result.ok ? 0 : result.protected ? 3 : 1);
   } catch (error) {
     process.stderr.write(`${error.message}\n`);
     process.exit(2);

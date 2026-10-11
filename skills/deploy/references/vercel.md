@@ -30,8 +30,12 @@ grep '^MW_CLIENT_ID=' .env | cut -d= -f2- | vercel env add VITE_MW_CLIENT_ID pre
 grep '^MW_CLIENT_SECRET=' .env | cut -d= -f2- | vercel env add VITE_MW_CLIENT_SECRET preview
 ```
 
-Use `EXPO_PUBLIC_MW_*` names for an Expo web build, and `production` instead of
-`preview` only for a production deploy the developer asked for. `--force`
+Use the names the game reads (checklist step 5): `EXPO_PUBLIC_MW_*` for an Expo
+web build, or whatever `import.meta.env.` names the source uses. On a new
+project, run each line for both `preview` and `production`: the first deployment
+of a new project is production, and a build without them ships without a key.
+Otherwise use `production` instead of `preview` only for a production deploy the
+developer asked for. `--force`
 overwrites an existing variable; `vercel env update` and `vercel env rm` change
 or remove one. By default Vercel stores Production and Preview values as type
 `secret`. That is fine here. These values are compiled into the public bundle
@@ -51,6 +55,14 @@ vercel deploy --prod --yes     # production: only when the developer asked
 address. **The first deployment of a new Vercel project is always production**,
 even without `--prod`: put that in the plan before running it for a project that
 has never been deployed. `--target=<environment>` picks a target by name.
+
+## Deployment protection
+
+Vercel's default Deployment Protection puts preview and generated deployment
+URLs behind a Vercel login, so players cannot open them (`poll-live.mjs`
+reports `protected`). The address players can use is the production domain,
+`<project>.vercel.app`, unless the developer turns protection off for previews
+in the project's settings. Say so in the plan.
 
 ## Live address
 
@@ -75,3 +87,4 @@ promising one.
 - https://vercel.com/docs/cli/env
 - https://vercel.com/docs/cli/whoami
 - https://vercel.com/docs/deployments/generated-urls
+- https://vercel.com/docs/deployment-protection
