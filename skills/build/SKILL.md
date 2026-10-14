@@ -59,7 +59,9 @@ see is touched.
 
 Build something the person can play first. Don't create a project, apply a setup or
 write any definitions until they've played it or asked for the backend. If they
-already have a game, go straight to connecting it.
+already have a game, go straight to connecting it. Naming Magicweave or a
+leaderboard in the first request is not asking for the backend yet: there is no
+game to connect, so build it first.
 
 Make it real when the person asks for something the local file cannot give: scores
 saved across devices, a board other people can see, or real coins. Not before.
@@ -213,7 +215,7 @@ write replaces the whole document — no patch, no merge — so read it first.
 Now the plain numbers go. Find each one in the marked section of the game and
 replace it with the SDK, one at a time. After every change the game must still run
 and play: that is how you know which change broke it. Field names come from
-`packages/sdk/src/game.gen.ts`; never guess them.
+the types in `@magicweave/sdk`; never guess them.
 
 ```
 import { connect } from "@magicweave/sdk";

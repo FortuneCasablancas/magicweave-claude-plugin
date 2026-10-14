@@ -15,7 +15,9 @@ pages:
 
 Build something the person can play first. Don't create a project, apply a setup or
 write any definitions until they've played it or asked for the backend. If they
-already have a game, go straight to connecting it.
+already have a game, go straight to connecting it. Naming Magicweave or a
+leaderboard in the first request is not asking for the backend yet: there is no
+game to connect, so build it first.
 
 Until Magicweave is connected, show coins and scores as plain numbers in the game.
 Don't write rules, limits or rewards in game code: Magicweave decides those once it's
@@ -60,8 +62,9 @@ Write one paragraph, before any code:
 Then go straight on. The card is a statement of what you are about to build, not a
 sign-off step.
 
-No shell, such as claude.ai? Build it as an artifact the person can play in the chat,
-and say that going live needs a coding agent.
+No shell, such as claude.ai? Build the game as a preview the person can play in the
+chat, and say that going live needs a coding agent: the Magicweave plugin, or the
+house rules at https://docs.magicweave.xyz/agent-rules/.
 
 ## Phase 2 — build the playable version
 
