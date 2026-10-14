@@ -153,7 +153,7 @@ answer. Never start from a blank document tree.
 - **Tools, in this order:**
   1. `recommend_blueprints` with `brief` — what the game does, in the person's
      words and from the code you can read — and `existing_game: true`. If the
-     brief is thin it answers with ranked questions instead of a ranking. With
+     brief is thin it answers with at most two plain questions instead of a ranking. With
      `existing_game: true` it never asks: it ranks, or answers `no-fit`.
   2. A playable game with a thin brief is not a reason to ask anything: read the
      game and rank. On `no-fit`, tell the person and write the documents in

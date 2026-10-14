@@ -7,7 +7,8 @@ toolsets: []
 tools:
   - get_doc
   - list_docs
-pages: [] # start — set at join once the docs corpus carries it
+pages:
+  - start
 ---
 
 # Start a game
