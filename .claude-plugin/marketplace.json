@@ -6,14 +6,14 @@
     "email": "sahil@magicweave.xyz",
     "url": "https://www.magicweave.xyz"
   },
-  "description": "The Magicweave plugin for Claude Code — build, edit, and migrate game backends.",
+  "description": "The Magicweave plugin for Claude Code — start, build, edit, and migrate game backends.",
   "plugins": [
     {
       "name": "magicweave",
       "source": "./",
-      "description": "Build, edit, and migrate Magicweave game backends from Claude Code.",
+      "description": "Start a playable game, then make it real: build, edit, and migrate Magicweave game backends from Claude Code.",
       "category": "gamedev",
-      "keywords": ["games", "game-economy", "leaderboards", "spin-wheel", "mcp", "gamedev"]
+      "keywords": ["games", "game-economy", "leaderboards", "streaks", "mcp", "gamedev"]
     }
   ]
 }
