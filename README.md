@@ -5,7 +5,7 @@ rules, leaderboards, and the rest of a game's economy — from Claude Code.
 
 This repository is both a **plugin marketplace** and the **Magicweave plugin** it distributes
 (the plugin lives at the repo root, so the repo is directly installable as a plugin too).
-The plugin bundles the live Magicweave MCP server (`https://mcp.magicweave.xyz/mcp`) and four
+The plugin bundles the live Magicweave MCP server (`https://mcp.magicweave.xyz/mcp`) and five
 skills that walk Claude through the work as checklists.
 
 ## Install
@@ -16,11 +16,12 @@ skills that walk Claude through the work as checklists.
 ```
 
 On first use the bundled MCP server prompts you to sign in once (OAuth, email + OTP) — no manual
-config. A blank organization is enough: `/magicweave:build` creates the project and environment
+config. A blank organization is enough: `/magicweave:start` and `/magicweave:build` create the project and environment
 through the server's `create_project_setup` tool.
 
 ## What you get
 
+- **`/magicweave:start`** — Start a game from a one-line idea: a playable version first, with coins and scores as plain numbers, before any Magicweave backend.
 - **`/magicweave:build`** — Build a new Magicweave game economy, concept to live in a development environment — currencies, stats, rules, leaderboards, checked and shipped in order.
 - **`/magicweave:edit`** — Change a live Magicweave game without breaking the people playing it — read the current state first, check impact, then publish and promote environment by environment.
 - **`/magicweave:migrate`** — Bring a launched game onto Magicweave — inventory its existing backend, map it onto the document tree, and carry its players across.
@@ -30,7 +31,7 @@ through the server's `create_project_setup` tool.
 Try it:
 
 ```
-/magicweave:build a 6-guess word game with a daily leaderboard
+/magicweave:start a 6-guess word game with a daily leaderboard
 ```
 
 ## Develop locally
@@ -49,7 +50,7 @@ claude plugin validate .
   plugin.json                       # plugin manifest (plugin lives at repo root)
   marketplace.json                  # marketplace catalog (source: "./")
 .mcp.json                           # remote MCP server (OAuth on enable)
-skills/{build,edit,migrate,deploy}/   # synced from mirage packages/mcp/skills
+skills/{start,build,edit,migrate,deploy}/   # synced from mirage packages/mcp/skills
 ```
 
 ## License

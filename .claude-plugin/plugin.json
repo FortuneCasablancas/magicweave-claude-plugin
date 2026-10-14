@@ -2,7 +2,7 @@
   "$schema": "https://json.schemastore.org/claude-code-plugin-manifest.json",
   "name": "magicweave",
   "description": "Build and run game backends on Magicweave — currencies, stats, rules, leaderboards — from Claude Code, with skills to build a new game, edit a live one, or migrate a launched one.",
-  "version": "2.0.0",
+  "version": "2.1.0",
   "author": {
     "name": "Magicweave",
     "email": "sahil@magicweave.xyz",

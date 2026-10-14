@@ -4,6 +4,12 @@ All notable changes to the Magicweave plugin are documented here. Versions follo
 [semantic versioning](https://semver.org); the version lives in
 `.claude-plugin/plugin.json`.
 
+## 2.1.0 — 2026-10-14
+
+- `start` skill added: turns a one-line game idea into a playable version first, then connects
+  Magicweave. Skills re-synced from mirage `packages/mcp/skills`; `build` now opens with the same
+  play-first order.
+
 ## 2.0.0 — 2026-10-07
 
 - Skills re-synced from mirage `packages/mcp/skills`: `build` rewritten for V2; `edit` and
